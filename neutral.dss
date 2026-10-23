@@ -1,0 +1,195 @@
+Set DefaultBaseFrequency=50 ! delete this line if your default frequency is already 50 Hz
+
+set datapath=C:\Users\xrhstos\Desktop\DIPLOMA_THESIS\LV_Diploma_Thesis\simulation !! set your own datapath
+
+clear
+
+ !! new network
+new circuit.sadu baseKv=20 angle=0 frequency=50 phases=3 MVAsc1=1e8 MVAsc3=1e8 x1r1=11.43 x0r0=4.138
+
+set voltagebases=[20 0.69]
+calcvoltagebases
+
+!!transformer 
+
+!!phase 1
+new transformer.Dy11ph1 phases=1 windings=2
+~ taps=[1, 1]
+~ buses=[Sourcebus.1.2 PT1.1.4]
+~ conns=[delta wye]
+~ kvs=[20 (0.69 3 sqrt /)]
+~ kvas=(210, 210)
+~ Xhl=4.6 %noloadloss=0 %loadloss=0 
+~ maxtap=1.1 mintap=0.9 numtap=10
+
+
+!!phase 2
+new transformer.Dy11ph2 phases=1 windings=2
+~ taps=[1, 1]
+~ buses=[Sourcebus.2.3 PT1.2.4]
+~ conns=[delta wye]
+~ kvs=[20 (0.69 3 sqrt /)]
+~ kvas=(210, 210)
+~ Xhl=4.6 %noloadloss=0  %loadloss=0
+~ maxtap=1.1 mintap=0.9 numtap=10
+
+
+!!phase 3
+new transformer.Dy11ph3 phases=1 windings=2
+~ taps=[1, 1]
+~ buses=[Sourcebus.3.1 PT1.3.4]
+~ conns=[delta wye]
+~ kvs=[20 (0.69 3 sqrt /)]
+~ kvas=(210, 210)
+~ Xhl=4.6 %noloadloss=0  %loadloss=0
+~ maxtap=1.1 mintap=0.9 numtap=10
+
+
+
+
+!!linecode
+new linecode.type1 nphases=4 R1=0.215 X1=0.334 B1=1.445 R0=0.363 X0=1.556 B0=1.445 Rg=0 Xg=0 units=km basefreq=50
+
+!!lines
+new line.L1 bus1=PT1.1.2.3.4 bus2=L101.1.2.3.4 length=0.13 phases=4 units=km linecode=type1
+new line.L2 bus1=L101.1.2.3.4 bus2=L102.1.2.3.4 length=0.08 phases=4 units=km linecode=type1
+new line.L3 bus1=L102.1.2.3.4 bus2=L103.1.2.3.4 length=0.06 phases=4 units=km linecode=type1
+new line.L4 bus1=L103.1.2.3.4 bus2=L104.1.2.3.4 length=0.12 phases=4 units=km linecode=type1
+new line.L5 bus1=L104.1.2.3.4 bus2=L105.1.2.3.4 length=0.07 phases=4 units=km linecode=type1
+new line.L6 bus1=L105.1.2.3.4 bus2=L106.1.2.3.4 length=0.05 phases=4 units=km linecode=type1
+new line.L7 bus1=L106.1.2.3.4 bus2=L133.1.2.3.4 length=0.05 phases=4 units=km linecode=type1
+new line.L8 bus1=L133.1.2.3.4 bus2=L134.1.2.3.4 length=0.01 phases=4 units=km linecode=type1
+new line.L9 bus1=L103.1.2.3.4 bus2=L107.1.2.3.4 length=0.04 phases=4 units=km linecode=type1
+new line.L10 bus1=L107.1.2.3.4 bus2=L108.1.2.3.4 length=0.04 phases=4 units=km linecode=type1
+new line.L11 bus1=L107.1.2.3.4 bus2=L109.1.2.3.4 length=0.05 phases=4 units=km linecode=type1
+new line.L12 bus1=L109.1.2.3.4 bus2=L110.1.2.3.4 length=0.005 phases=4 units=km linecode=type1
+new line.L13 bus1=L110.1.2.3.4 bus2=L111.1.2.3.4 length=0.01 phases=4 units=km linecode=type1
+new line.L14 bus1=L109.1.2.3.4 bus2=L112.1.2.3.4 length=0.1 phases=4 units=km linecode=type1
+new line.L15 bus1=L112.1.2.3.4 bus2=L113.1.2.3.4 length=0.05 phases=4 units=km linecode=type1
+new line.L16 bus1=L113.1.2.3.4 bus2=L114.1.2.3.4 length=0.04 phases=4 units=km linecode=type1
+new line.L17 bus1=N1.1.2.3.4 bus2=L115.1.2.3.4 length=0.03 phases=4 units=km linecode=type1
+new line.L18 bus1=L115.1.2.3.4 bus2=L116.1.2.3.4 length=0.12 phases=4 units=km linecode=type1
+new line.L19 bus1=L116.1.2.3.4 bus2=L117.1.2.3.4 length=0.04 phases=4 units=km linecode=type1
+new line.L20 bus1=L117.1.2.3.4 bus2=L118.1.2.3.4 length=0.03 phases=4 units=km linecode=type1
+new line.L21 bus1=L109.1.2.3.4 bus2=N1.1.2.3.4 length=0.02 phases=4 units=km linecode=type1
+new line.L22 bus1=N1.1.2.3.4 bus2=L119.1.2.3.4 length=0.09 phases=4 units=km linecode=type1
+new line.L23 bus1=L119.1.2.3.4 bus2=L120.1.2.3.4 length=0.1 phases=4 units=km linecode=type1
+new line.L24 bus1=L120.1.2.3.4 bus2=L121.1.2.3.4 length=0.04 phases=4 units=km linecode=type1
+new line.L25 bus1=L121.1.2.3.4 bus2=L122.1.2.3.4 length=0.03 phases=4 units=km linecode=type1
+new line.L26 bus1=L122.1.2.3.4 bus2=L123.1.2.3.4 length=0.07 phases=4 units=km linecode=type1
+new line.L27 bus1=L123.1.2.3.4 bus2=L124.1.2.3.4 length=0.03 phases=4 units=km linecode=type1
+new line.L28 bus1=L124.1.2.3.4 bus2=L125.1.2.3.4 length=0.03 phases=4 units=km linecode=type1
+new line.L29 bus1=L125.1.2.3.4 bus2=N2.1.2.3.4 length=0.01 phases=4 units=km linecode=type1
+new line.L30 bus1=N2.1.2.3.4 bus2=L129.1.2.3.4 length=0.01 phases=4 units=km linecode=type1
+new line.L31 bus1=L129.1.2.3.4 bus2=L130.1.2.3.4 length=0.03 phases=4 units=km linecode=type1
+new line.L32 bus1=N2.1.2.3.4 bus2=L126.1.2.3.4 length=0.04 phases=4 units=km linecode=type1
+new line.L33 bus1=L126.1.2.3.4 bus2=L127.1.2.3.4 length=0.05 phases=4 units=km linecode=type1
+new line.L34 bus1=L127.1.2.3.4 bus2=L128.1.2.3.4 length=0.05 phases=4 units=km linecode=type1
+new line.L35 bus1=L130.1.2.3.4 bus2=L131.1.2.3.4 length=0.01 phases=4 units=km linecode=type1
+
+
+
+!!Reactors
+new Reactor.reacPT1 phases=1 bus1=PT1.4 R=0.01 X=0.01
+new Reactor.reacL101 phases=1 bus1=L101.4 R=0.01 X=0.01
+new Reactor.reacL102 phases=1 bus1=L102.4 R=0.01 X=0.01
+new Reactor.reacL103 phases=1 bus1=L103.4 R=0.01 X=0.01
+new Reactor.reacL104 phases=1 bus1=L104.4 R=0.01 X=0.01
+new Reactor.reacL105 phases=1 bus1=L105.4 R=0.01 X=0.01
+new Reactor.reacL106 phases=1 bus1=L106.4 R=0.01 X=0.01
+new Reactor.reacL133 phases=1 bus1=L133.4 R=0.01 X=0.01
+new Reactor.reacL134 phases=1 bus1=L134.4 R=0.01 X=0.01
+new Reactor.reacL107 phases=1 bus1=L107.4 R=0.01 X=0.01
+new Reactor.reacL108 phases=1 bus1=L108.4 R=0.01 X=0.01
+new Reactor.reacL109 phases=1 bus1=L109.4 R=0.01 X=0.01
+new Reactor.reacL112 phases=1 bus1=L112.4 R=0.01 X=0.01
+new Reactor.reacL113 phases=1 bus1=L113.4 R=0.01 X=0.01
+new Reactor.reacL114 phases=1 bus1=L114.4 R=0.01 X=0.01
+new Reactor.reacL110 phases=1 bus1=L110.4 R=0.01 X=0.01
+new Reactor.reacL111 phases=1 bus1=L111.4 R=0.01 X=0.01
+new Reactor.reacN1 phases=1 bus1=N1.4 R=0.01 X=0.01
+new Reactor.reacL115 phases=1 bus1=L115.4 R=0.01 X=0.01
+new Reactor.reacL116 phases=1 bus1=L116.4 R=0.01 X=0.01
+new Reactor.reacL117 phases=1 bus1=L117.4 R=0.01 X=0.01
+new Reactor.reacL118 phases=1 bus1=L118.4 R=0.01 X=0.01
+new Reactor.reacL119 phases=1 bus1=L119.4 R=0.01 X=0.01
+new Reactor.reacL120 phases=1 bus1=L120.4 R=0.01 X=0.01
+new Reactor.reacL121 phases=1 bus1=L121.4 R=0.01 X=0.01
+new Reactor.reacL122 phases=1 bus1=L122.4 R=0.01 X=0.01
+new Reactor.reacL123 phases=1 bus1=L123.4 R=0.01 X=0.01
+new Reactor.reacL124 phases=1 bus1=L124.4 R=0.01 X=0.01
+new Reactor.reacL125 phases=1 bus1=L125.4 R=0.01 X=0.01
+new Reactor.reacN2 phases=1 bus1=N2.4 R=0.01 X=0.01
+new Reactor.reacL129 phases=1 bus1=L129.4 R=0.01 X=0.01
+new Reactor.reacL130 phases=1 bus1=L130.4 R=0.01 X=0.01
+new Reactor.reacL131 phases=1 bus1=L131.4 R=0.01 X=0.01
+new Reactor.reacL126 phases=1 bus1=L126.4 R=0.01 X=0.01
+new Reactor.reacL127 phases=1 bus1=L127.4 R=0.01 X=0.01
+new Reactor.reacL128 phases=1 bus1=L128.4 R=0.01 X=0.01
+
+!!loads
+
+
+!!load1
+new load.load1a bus1=L134.1.4 phases=1 kV=(0.69 3 sqrt /) kW=5 kvar=1.5 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+new load.load1b bus1=L134.2.4 phases=1 kV=(0.69 3 sqrt /) kW=0 kvar=0 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+new load.load1c bus1=L134.3.4 phases=1 kV=(0.69 3 sqrt /) kW=3 kvar=1 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+
+!!load2
+new load.load2a bus1=L106.1.4 phases=1 kV=(0.69 3 sqrt /) kW=7 kvar=2 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+new load.load2b bus1=L106.2.4 phases=1 kV=(0.69 3 sqrt /) kW=3 kvar=1 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+new load.load2c bus1=L106.3.4 phases=1 kV=(0.69 3 sqrt /) kW=6 kvar=2 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+
+!!load3
+new load.load3a bus1=L108.1.4 phases=1 kV=(0.69 3 sqrt /) kW=6 kvar=2 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+new load.load3b bus1=L108.2.4 phases=1 kV=(0.69 3 sqrt /) kW=3 kvar=1 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+new load.load3c bus1=L108.3.4 phases=1 kV=(0.69 3 sqrt /) kW=7 kvar=2 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+
+!!load4
+new load.load4a bus1=L114.1.4 phases=1 kV=(0.69 3 sqrt /) kW=6 kvar=2 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+new load.load4b bus1=L114.2.4 phases=1 kV=(0.69 3 sqrt /) kW=5 kvar=1.5 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+new load.load4c bus1=L114.3.4 phases=1 kV=(0.69 3 sqrt /) kW=6 kvar=2 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+
+!!load5
+new load.load5a bus1=L111.1.4 phases=1 kV=(0.69 3 sqrt /) kW=4 kvar=2 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+new load.load5b bus1=L111.2.4 phases=1 kV=(0.69 3 sqrt /) kW=3 kvar=1 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+new load.load5c bus1=L111.3.4 phases=1 kV=(0.69 3 sqrt /) kW=5 kvar=2 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+
+!!load6
+new load.load6a bus1=L118.1.4 phases=1 kV=(0.69 3 sqrt /) kW=3 kvar=1 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+new load.load6b bus1=L118.2.4 phases=1 kV=(0.69 3 sqrt /) kW=1 kvar=0.5 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+new load.load6c bus1=L118.3.4 phases=1 kV=(0.69 3 sqrt /) kW=4 kvar=2 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+
+!!load7
+new load.load7a bus1=L120.1.4 phases=1 kV=(0.69 3 sqrt /) kW=3 kvar=1 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+new load.load7b bus1=L120.2.4 phases=1 kV=(0.69 3 sqrt /) kW=0 kvar=0 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+new load.load7c bus1=L120.3.4 phases=1 kV=(0.69 3 sqrt /) kW=3 kvar=1 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+
+!!load8
+new load.load8a bus1=L124.1.4 phases=1 kV=(0.69 3 sqrt /) kW=3 kvar=1 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+new load.load8b bus1=L124.2.4 phases=1 kV=(0.69 3 sqrt /) kW=0 kvar=0 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+new load.load8c bus1=L124.3.4 phases=1 kV=(0.69 3 sqrt /) kW=0 kvar=0 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+
+!!load9
+new load.load9a bus1=L126.1.4 phases=1 kV=(0.69 3 sqrt /) kW=3 kvar=2 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+new load.load9b bus1=L126.2.4 phases=1 kV=(0.69 3 sqrt /) kW=4 kvar=1.5 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+new load.load9c bus1=L126.3.4 phases=1 kV=(0.69 3 sqrt /) kW=3 kvar=1 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+
+!!load10
+new load.load10a bus1=L128.1.4 phases=1 kV=(0.69 3 sqrt /) kW=3 kvar=1 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+new load.load10b bus1=L128.2.4 phases=1 kV=(0.69 3 sqrt /) kW=0 kvar=0 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+new load.load10c bus1=L128.3.4 phases=1 kV=(0.69 3 sqrt /) kW=0 kvar=0 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+
+!!load11
+new load.load11a bus1=L131.1.4 phases=1 kV=(0.69 3 sqrt /) kW=4 kvar=1.5 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+new load.load11b bus1=L131.2.4 phases=1 kV=(0.69 3 sqrt /) kW=3 kvar=1 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+new load.load11c bus1=L131.3.4 phases=1 kV=(0.69 3 sqrt /) kW=2 kvar=1 model=1 status=fixed Vminpu=0.1 Vmaxpu=2 basefreq=50
+
+set tolerance=0.0001
+set controlmode=static
+set mode=snapshot
+Set maxiterations=1000000
+
+
+
+
